@@ -1,4 +1,4 @@
-## Instal Required Libs
+## Install Required Libs
 
 ```bash
 $ crewai install
