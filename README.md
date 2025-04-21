@@ -1,3 +1,14 @@
+## Instal Required Libs
+
+```bash
+$ crewai install
+```
+## For Python Libs,
+
+```bash
+$ pip install <library>
+```
+
 ## Running the Project
 
 ```bash
