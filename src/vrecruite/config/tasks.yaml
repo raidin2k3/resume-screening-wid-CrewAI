@@ -1,0 +1,60 @@
+skill_scraper_task:
+  description: >
+    Analyze the given requirements: {requirements}. Identify all required skills, tools, and key responsibilities. 
+    Then, filter the candidates who explicitly mention matching skills or responsibilities in their resumes. 
+    Match only if the resume *explicitly* states relevant experience or tool usage.
+  expected_output: >
+    Return only candidates whose resumes explicitly show matching skills or tools aligned with the requirements. 
+    Do not infer or guess skills from job titles. Do not generate new candidates or skills. Use only available data. 
+    Output format should be a list of candidate names and matched skills only. This list will be passed to the next stage.
+
+  agent: skill_scraper
+
+
+talent_acquisition_task:
+  description: >
+    Open each resume from the drive link {link}. For each resume, check if at least 75% of the skills and responsibilities 
+    from the requirement ({requirements}) are clearly fulfilled. 
+    Consider only explicitly mentioned skills or experience. Use a deterministic, checklist-style comparison.
+  expected_output: >
+    Return only candidates who fulfill 75% or more of the requirements. Do not alter the list. 
+    Do not re-order the results. Do not hallucinate candidate names or details. 
+    Output format: name, matched percentage, and list of matched skills.
+    
+  agent: talent_acquisition_specialist
+
+
+recruiting_task:
+  description: >
+    From the candidate list shared by the talent acquisition specialist, select candidates for interviews 
+    based on exact skill matching and relevance to the original requirements. Ensure no duplicates are shortlisted. 
+    Compare final choices to past results {past} and re-evaluate only if new skills were matched. 
+    Keep output deterministic across runs.
+  expected_output: >
+    List names of final shortlisted candidates. For each, provide:
+    - Reason for choosing (based on exact skill/responsibility match, no assumptions).
+    - Matching skills.
+    - Comparison to past selection (if present).
+    Do not add new names. Do not change order from previous stage.
+
+  agent: senior_recruiter
+
+
+formatting_task:
+  description: >
+    Format the shortlist results in the required style without reordering, reinterpreting, or modifying evaluations.
+    Apply strict format as given below and maintain result sequence from {past}.
+  expected_output: >
+    -----------------------------------------------------------------------------
+    Name - 
+    Candidate Fit - (best - if requirement matching percentage >= 90%, 
+                     good - if requirement matching percentage >= 75% and <90%,
+                     ok   - if requirement matching percentage <75%)
+
+    Reason for Choosing - 
+    Matching Skills - 
+    -----------------------------------------------------------------------------
+    Return in exact format above. Do not generate new data. Do not change the candidate order. 
+    Maintain formatting consistency.
+    
+  agent: formatter
