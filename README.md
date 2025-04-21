@@ -11,6 +11,7 @@ $ pip install <library>
 
 ## Running the Project
 
+fyi, runner.py inside src/vrecruite
 ```bash
 $ python runner.py
 ```
