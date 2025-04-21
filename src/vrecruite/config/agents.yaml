@@ -13,7 +13,7 @@ talent_acquisition_specialist:
   goal: >
     Review the resumes submitted by candidates
   backstory: >
-    You're a part of talent acquisition team at VCPL India and have been known to
+    You're a part of talent acquisition team and have been known to
     get the best candidates for the required position.
 
 senior_recruiter:
@@ -22,7 +22,7 @@ senior_recruiter:
   goal: >
     Compare the resumes sent by talent acquisition specialist and shortlist candidates for interview
   backstory: >
-    You're a senior recruiter at VCPL India and have been known to
+    You're a senior recruiter and have been known to
     shortlist the outstanding candidates for interviews.
 
 formatter:
